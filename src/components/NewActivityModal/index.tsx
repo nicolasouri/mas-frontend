@@ -1,5 +1,7 @@
 import Modal from 'react-modal';
 import { useForm } from 'react-hook-form';
+import api from '../../services/api';
+
 import {FiX} from 'react-icons/fi'
 import { Container, Error } from './styles';
 
@@ -18,7 +20,7 @@ export function NewActivityModal({isOpen, onRequestClose}:NewActivityModalProps)
     
     const {register, handleSubmit, formState: {errors}} = useForm<FormData>();
 
-    const onSubmit = handleSubmit(data => alert(JSON.stringify(data)));
+    const onSubmit = handleSubmit(data => api.post('/activity', data).then(response => alert(response.data)));
 
     return(
         <Modal

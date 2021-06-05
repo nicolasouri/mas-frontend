@@ -1,6 +1,8 @@
 import {FiMail, FiLock, FiUser, FiArrowLeft} from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
+import api from '../../services/api';
+
 import { Button } from '../../components/Button'
 import {Container, Content, FormContainer, InputContainer, Error,  Background} from './styles'
 
@@ -14,7 +16,7 @@ export function Register(){
 
     const {register, handleSubmit, formState: {errors}} = useForm<FormData>();
 
-    const onSubmit = handleSubmit(data => alert(JSON.stringify(data)));
+    const onSubmit = handleSubmit(data => api.post('/user', data).then(response => alert(response.data)));
 
     return(
         <Container>
